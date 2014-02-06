@@ -37,9 +37,6 @@ RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found 
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
 
 ADD run /usr/local/bin/
-
 EXPOSE 8080
-
 VOLUME ["/var/lib/jenkins"]
-
 CMD ["/usr/local/bin/run"]

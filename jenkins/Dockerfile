@@ -3,18 +3,18 @@ MAINTAINER Barry Botha <barry@io.co.za>
 
 # Installing Base Packages
 
+RUN echo deb http://archive.ubuntu.com/ubuntu precise universe >> /etc/apt/sources.list
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install apt-utils python-software-properties git openssh-client wget -y
+RUN apt-get install apt-utils python-software-properties git openssh-client wget supervisor -y
 
 # Installing Jenkins
 
 RUN wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
-RUN echo deb http://archive.ubuntu.com/ubuntu precise universe >> /etc/apt/sources.list
 RUN echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 RUN apt-get update
 RUN apt-get install -y jenkins
 
-# StOP Jenkins Service
+# Stop Jenkins Service
 
 RUN service jenkins stop
 
@@ -37,9 +37,11 @@ RUN su -c "cd ~ && pwd" - jenkins
 # Run Command:
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
 
-ADD run /usr/local/bin/
-RUN chmod +x /usr/local/bin/run
+#ADD run /usr/local/bin/
+#RUN chmod +x /usr/local/bin/run
+
+ADD	./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 8080
 VOLUME ["/var/lib/jenkins"]
-CMD ["/usr/local/bin/run"]
+CMD ["/usr/bin/supervisord"]

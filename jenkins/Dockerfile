@@ -26,7 +26,7 @@ RUN chown jenkins /var/lib/jenkins
 
 # Setting up SSH credentials
 
-RUN su -c "ssh-keygen -f id_rsa -t rsa -N ''" - jenkins
+RUN su -c "ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''" - jenkins
 RUN ls -la /var/lib
 RUN ls -la /var/lib/jenkins
 RUN echo $PATH

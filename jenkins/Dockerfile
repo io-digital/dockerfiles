@@ -41,4 +41,4 @@ RUN su -c "cd ~ && pwd" - jenkins
 EXPOSE 8080
 VOLUME ["/var/lib/jenkins"]
 # CMD ["/usr/local/bin/run"]
-CMD ["service jenkins start"]
+CMD ["/etc/init.d/jenkins start"]

@@ -14,9 +14,9 @@ RUN echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/
 RUN apt-get update
 RUN apt-get install -y jenkins
 
-# Start Jenkins Service
+# StOP Jenkins Service
 
-RUN service jenkins start
+RUN service jenkins stop
 
 # Create home directory - you want to create this as a volume when you run this image
 
@@ -37,8 +37,9 @@ RUN su -c "cd ~ && pwd" - jenkins
 # Run Command:
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
 
-# ADD run /usr/local/bin/
+ADD run /usr/local/bin/
+RUN chmod +x /usr/local/bin/run
+
 EXPOSE 8080
 VOLUME ["/var/lib/jenkins"]
-# CMD ["/usr/local/bin/run"]
-# CMD ["/etc/init.d/jenkins start"]
+CMD ["/usr/local/bin/run"]

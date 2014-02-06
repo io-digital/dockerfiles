@@ -14,14 +14,14 @@ RUN echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/
 RUN apt-get update
 RUN apt-get install -y jenkins
 
-# Starting Jenkins
+# Stop Jenkins Service
 
-# RUN service jenkins stop
+RUN service jenkins stop
 
 # Create home directory - you want to create this as a volume when you run this image
 
-#RUN mkdir -p /var/lib/jenkins
-#RUN chown jenkins /var/lib/jenkins
+# RUN mkdir -p /var/lib/jenkins
+# RUN chown jenkins /var/lib/jenkins
 
 # Setting up SSH credentials
 
@@ -34,8 +34,10 @@ RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found 
 # Run Command:
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
 
+ADD run /usr/local/bin/
+
 EXPOSE 8080
 
 VOLUME ["/var/lib/jenkins"]
 
-CMD su -c "java -jar /usr/share/jenkins/jenkins.war" - jenkins
+CMD ["/usr/local/bin/run"]

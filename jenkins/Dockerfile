@@ -27,6 +27,9 @@ RUN chown jenkins /var/lib/jenkins
 # Setting up SSH credentials
 
 RUN su -c "ssh-keygen -f id_rsa -t rsa -N ''" - jenkins
+RUN ls -la /var/lib
+RUN ls -la /var/lib/jenkins
+RUN echo $PATH
 RUN su -c "touch ~/.ssh/known_hosts" - jenkins
 RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F github.com | grep -q found || ssh-keyscan -H github.com > ~/.ssh/known_hosts" - jenkins
 RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found || ssh-keyscan -H bitbucket.com > ~/.ssh/known_hosts" - jenkins

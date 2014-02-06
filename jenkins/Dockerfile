@@ -18,6 +18,11 @@ RUN apt-get install -y jenkins
 
 RUN /etc/init.d/jenkins start
 
+# Create home directory - you want to create this as a volume when you run this image
+
+RUN mkdir -p /var/lib/jenkins
+RUN chown jenkins /var/lib/jenkins
+
 # Setting up SSH credentials
 
 RUN su -c "ssh-keygen -f id_rsa -t rsa -N ''" - jenkins

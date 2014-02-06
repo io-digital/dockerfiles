@@ -36,7 +36,7 @@ RUN su -c "cat ~/.ssh/id_rsa.pub" - jenkins
 # Run Command:
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
 
-ADD run /usr/local/bin/
+ADD run /usr/local/bin/run
 
 EXPOSE 8080
 

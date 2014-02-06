@@ -21,15 +21,12 @@ CMD java -jar /usr/share/jenkins/jenkins.war
 
 # Create home directory - you want to create this as a volume when you run this image
 
-RUN mkdir -p /var/lib/jenkins
-RUN chown jenkins /var/lib/jenkins
+#RUN mkdir -p /var/lib/jenkins
+#RUN chown jenkins /var/lib/jenkins
 
 # Setting up SSH credentials
 
 RUN su -c "ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''" - jenkins
-RUN ls -la /var/lib
-RUN ls -la /var/lib/jenkins
-RUN echo $PATH
 RUN su -c "touch ~/.ssh/known_hosts" - jenkins
 RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F github.com | grep -q found || ssh-keyscan -H github.com > ~/.ssh/known_hosts" - jenkins
 RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found || ssh-keyscan -H bitbucket.com > ~/.ssh/known_hosts" - jenkins
@@ -37,5 +34,7 @@ RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found 
 # SSH Public Key Generated
 # Run Command:
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
+
+VOLUME ["/var/lib/jenkins"]
 
 EXPOSE 8080

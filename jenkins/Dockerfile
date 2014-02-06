@@ -16,7 +16,7 @@ RUN apt-get install -y jenkins
 
 # Start Jenkins Service
 
-# RUN service jenkins start
+RUN service jenkins start
 
 # Create home directory - you want to create this as a volume when you run this image
 
@@ -41,4 +41,4 @@ RUN su -c "cd ~ && pwd" - jenkins
 EXPOSE 8080
 VOLUME ["/var/lib/jenkins"]
 # CMD ["/usr/local/bin/run"]
-CMD ["/etc/init.d/jenkins start"]
+# CMD ["/etc/init.d/jenkins start"]

@@ -20,9 +20,9 @@ RUN /etc/init.d/jenkins start
 
 # Setting up SSH credentials
 
-RUN su -c "ssh-keygen -f id_rsa -t rsa -N ''" jenkins
-RUN su -c "ssh-keygen -f /var/lib/jenkins/.ssh/known_hosts -H -F github.com | grep -q found || ssh-keyscan -H github.com > /var/lib/jenkins/.ssh/known_hosts" jenkins
-RUN su -c "ssh-keygen -f /var/lib/jenkins/.ssh/known_hosts -H -F bitbucket.com | grep -q found || ssh-keyscan -H bitbucket.com > /var/lib/jenkins/.ssh/known_hosts" jenkins
+RUN su -c "ssh-keygen -f id_rsa -t rsa -N ''" - jenkins
+RUN su -c "ssh-keygen -f /var/lib/jenkins/.ssh/known_hosts -H -F github.com | grep -q found || ssh-keyscan -H github.com > /var/lib/jenkins/.ssh/known_hosts" - jenkins
+RUN su -c "ssh-keygen -f /var/lib/jenkins/.ssh/known_hosts -H -F bitbucket.com | grep -q found || ssh-keyscan -H bitbucket.com > /var/lib/jenkins/.ssh/known_hosts" - jenkins
 
 # SSH Public Key Generated
 # Run Command:

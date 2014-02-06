@@ -16,8 +16,7 @@ RUN apt-get install -y jenkins
 
 # Starting Jenkins
 
-RUN service jenkins stop
-CMD java -jar /usr/share/jenkins/jenkins.war
+# RUN service jenkins stop
 
 # Create home directory - you want to create this as a volume when you run this image
 
@@ -35,6 +34,8 @@ RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found 
 # Run Command:
 # docker run -p 8080:8080 -v /var/lib/jenkins:/var/lib/jenkins -d io-digital/jenkins
 
+EXPOSE 8080
+
 VOLUME ["/var/lib/jenkins"]
 
-EXPOSE 8080
+CMD su -c "java -jar /usr/share/jenkins/jenkins.war" - jenkins

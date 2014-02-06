@@ -30,7 +30,7 @@ RUN su -c "touch ~/.ssh/known_hosts" - jenkins
 RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F github.com | grep -q found || ssh-keyscan -H github.com > ~/.ssh/known_hosts" - jenkins
 RUN su -c "ssh-keygen -f ~/.ssh/known_hosts -H -F bitbucket.com | grep -q found || ssh-keyscan -H bitbucket.com > ~/.ssh/known_hosts" - jenkins
 RUN su -c "cat ~/.ssh/known_hosts" - jenkins
-RUN su -c "cat ~/.ssh/id_rsa.pub - jenkins
+RUN su -c "cat ~/.ssh/id_rsa.pub" - jenkins
 
 # SSH Public Key Generated
 # Run Command:

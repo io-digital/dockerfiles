@@ -16,7 +16,8 @@ RUN apt-get install -y jenkins
 
 # Starting Jenkins
 
-RUN /etc/init.d/jenkins start
+RUN service jenkins stop
+CMD java -jar /usr/share/jenkins/jenkins.war
 
 # Create home directory - you want to create this as a volume when you run this image
 

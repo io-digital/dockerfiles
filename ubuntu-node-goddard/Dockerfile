@@ -17,6 +17,10 @@ RUN cd /tmp && \
 ADD ./fortinet.crt /usr/local/share/ca-certificates/fortiner.crt
 RUN update-ca-certificates
 
+# install npm packages
+ONBUILD ADD package.json /app/
+ONBUILD ADD . /app
+
 # Environment vars
 ENV NODE_ENV production
 
